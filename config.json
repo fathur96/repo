@@ -1,7 +1,11 @@
 {
   "socketURL": "/",
   "dirPath": "",
+<<<<<<< HEAD
   "homePage": "/_main/login.html",
+=======
+  "homePage": "/demos/index.html",
+>>>>>>> 2nd commit
   "socketMessageEvent": "RTCMultiConnection-Message",
   "socketCustomEvent": "RTCMultiConnection-Custom-Message",
   "port": "9001",

@@ -1,14 +1,25 @@
+<<<<<<< HEAD
 ﻿<!-- Demo version: 2018.12.01 -->
+=======
+<!-- Demo version: 2018.12.11 -->
+>>>>>>> 2nd commit
 
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<<<<<<< HEAD
   <title>Dashboard + Video Conferencing + Chat + File Sharing | RTCMultiConnection</title>
   <meta name="description" content="WebRTC Dashboard including support for canvas drawing, canvas data syncing, video conferencing, screen sharing and video conferencing. Including chat and file sharing.">
 
   <link rel="shortcut icon" href="/demos/logo.png">
+=======
+  <title>.: Customer Service :.</title>
+  <meta name="description" content="WebRTC Dashboard including support for canvas drawing, canvas data syncing, video conferencing, screen sharing and video conferencing. Including chat and file sharing.">
+
+  <link rel="shortcut icon" href="/demos/btpn.png">
+>>>>>>> 2nd commit
   <link rel="stylesheet" type="text/css" href="/demos/css/emojionearea.min.css">
 
   <script src="/demos/js/jquery.min.js"></script>
@@ -142,10 +153,30 @@ hr {
     width: 15px;
     vertical-align: middle;
 }
+<<<<<<< HEAD
 </style>
 
 <article>
 <div id="widget-container" style="position: fixed;bottom: 0;right: 0;left: 20%;height: 100%;border: 1px solid black; border-top:0; border-bottom: 0;"></div>
+=======
+
+#screen-viewer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999999999999;
+    display: none;
+}
+</style>
+
+<article>
+
+<div id="widget-container" style="position: fixed;bottom: 0;right: 0;left: 20%;height: 100%;border: 1px solid black; border-top:0; border-bottom: 0;"></div>
+<video id="screen-viewer" controls playsinline autoplay></video>
+
+>>>>>>> 2nd commit
 <div style="width: 20%; height: 100%; position: absolute;left:0;">
     <video id="main-video" controls playsinline autoplay></video>
     <div id="other-videos"></div>
@@ -283,6 +314,7 @@ connection.onopen = function(event) {
 
     document.getElementById('btn-chat-message').disabled = false;
     document.getElementById('btn-attach-file').style.display = 'inline-block';
+<<<<<<< HEAD
 
     if(params.demoType === 'screen-sharing') {
         document.getElementById('btn-share-screen').style.display = 'inline-block';
@@ -293,6 +325,9 @@ connection.onopen = function(event) {
             showMainVideo: true
         }, event.userid);
     }
+=======
+    document.getElementById('btn-share-screen').style.display = 'inline-block';
+>>>>>>> 2nd commit
 };
 
 connection.onclose = connection.onerror = connection.onleave = function(event) {
@@ -301,12 +336,28 @@ connection.onclose = connection.onerror = connection.onleave = function(event) {
 
 connection.onmessage = function(event) {
     if(event.data.showMainVideo) {
+<<<<<<< HEAD
         $('#main-video').show();
+=======
+        // $('#main-video').show();
+        $('#screen-viewer').css({
+            top: $('#widget-container').offset().top,
+            left: $('#widget-container').offset().left,
+            width: $('#widget-container').width(),
+            height: $('#widget-container').height()
+        });
+        $('#screen-viewer').show();
+>>>>>>> 2nd commit
         return;
     }
 
     if(event.data.hideMainVideo) {
+<<<<<<< HEAD
         $('#main-video').hide();
+=======
+        // $('#main-video').hide();
+        $('#screen-viewer').hide();
+>>>>>>> 2nd commit
         return;
     }
 
@@ -343,6 +394,7 @@ connection.onmessage = function(event) {
 
 // extra code
 
+<<<<<<< HEAD
 function beforeOpenRoom(callback) {
     if(params.demoType !== 'canvas-stream') {
         callback();
@@ -378,6 +430,14 @@ function beforeOpenRoom(callback) {
 
 connection.onstream = function(event) {
     if (event.stream.isScreen) {
+=======
+connection.onstream = function(event) {
+    if (event.stream.isScreen && !event.stream.canvasStream) {
+        $('#screen-viewer').get(0).srcObject = event.stream;
+        $('#screen-viewer').hide();
+    }
+    else if (event.extra.roomOwner === true) {
+>>>>>>> 2nd commit
         var video = document.getElementById('main-video');
         video.setAttribute('data-streamid', event.streamid);
         // video.style.display = 'none';
@@ -386,6 +446,10 @@ connection.onstream = function(event) {
             video.volume = 0;
         }
         video.srcObject = event.stream;
+<<<<<<< HEAD
+=======
+        $('#main-video').show();
+>>>>>>> 2nd commit
     } else {
         event.mediaElement.controls = false;
 
@@ -625,6 +689,7 @@ if(!!params.password) {
 
 designer.appendTo(document.getElementById('widget-container'), function() {
     if (params.open === true || params.open === 'true') {
+<<<<<<< HEAD
         beforeOpenRoom(function() {
             if(params.demoType === 'screen-sharing') {
                 var tempStreamCanvas = document.getElementById('temp-stream-canvas');
@@ -636,6 +701,17 @@ designer.appendTo(document.getElementById('widget-container'), function() {
                 window.tempStream = tempStream;
             }
 
+=======
+            var tempStreamCanvas = document.getElementById('temp-stream-canvas');
+            var tempStream = tempStreamCanvas.captureStream();
+            tempStream.isScreen = true;
+            tempStream.streamid = tempStream.id;
+            tempStream.type = 'local';
+            connection.attachStreams.push(tempStream);
+            window.tempStream = tempStream;
+
+            connection.extra.roomOwner = true;
+>>>>>>> 2nd commit
             connection.open(params.sessionid, function(isRoomOpened, roomid, error) {
                 if (error) {
                     if (error === connection.errors.ROOM_NOT_AVAILABLE) {
@@ -649,7 +725,10 @@ designer.appendTo(document.getElementById('widget-container'), function() {
                     location.reload();
                 });
             });
+<<<<<<< HEAD
         });
+=======
+>>>>>>> 2nd commit
     } else {
         connection.join(params.sessionid, function(isRoomJoined, roomid, error) {
             if (error) {
@@ -756,7 +835,12 @@ function replaceScreenTrack(stream) {
             hideMainVideo: true
         });
 
+<<<<<<< HEAD
         $('#main-video').hide();
+=======
+        // $('#main-video').hide();
+        $('#screen-viewer').hide();
+>>>>>>> 2nd commit
         $('#btn-share-screen').show();
         replaceTrack(tempStream.getTracks()[0], screenTrackId);
     });
@@ -771,7 +855,18 @@ function replaceScreenTrack(stream) {
         showMainVideo: true
     });
 
+<<<<<<< HEAD
     $('#main-video').show();
+=======
+    // $('#main-video').show();
+    $('#screen-viewer').css({
+            top: $('#widget-container').offset().top,
+            left: $('#widget-container').offset().left,
+            width: $('#widget-container').width(),
+            height: $('#widget-container').height()
+        });
+    $('#screen-viewer').show();
+>>>>>>> 2nd commit
 }
 
 $('#btn-share-screen').click(function() {
