@@ -1,55 +1,38 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-	<meta charset="utf-8">
-	<title>Login Form</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>.: Main Menu :.</title>
+	<link rel="stylesheet" href="/demos/css/bootstrap.min.css">
 	<style>
-		.login-form {
+		.main-menu {
 			width: 300px;
 			margin: 0 auto;
 			font-family: Tahoma, Geneva, sans-serif;
 		}
 
-		.login-form h1 {
+		.main-menu h1 {
 			text-align: center;
 			color: #4d4d4d;
 			font-size: 24px;
 			padding: 20px 0 20px 0;
 		}
-
-		.login-form input[type="password"],
-		.login-form input[type="text"] {
-			width: 100%;
-			padding: 15px;
-			border: 1px solid #dddddd;
-			margin-bottom: 15px;
-			box-sizing: border-box;
-		}
-
-		.login-form input[type="submit"] {
-			width: 100%;
-			padding: 15px;
-			background-color: #535b63;
-			border: 0;
-			box-sizing: border-box;
-			cursor: pointer;
-			font-weight: bold;
-			color: #ffffff;
-		}
 	</style>
 </head>
 
 <body>
-	<div class="login-form">
+	<div class="main-menu">
 		<center><a href="https://www.btpn.com" target="_blank"><img class="logo" src="btpn.png"
 					alt="RTCMultiConnection" /></a> </center>
 		<hr />
-		<ul>
-			<li><a href="dashboard/">CUSTOMER SERVICE ROOMS</a></li>
-			<li><a href="/demos/dashboard/sales-list.html" class="td-style2">SALES MANAGEMENT</a></li>
-			<li><a href="/demos/dashboard/call-management.html" class="td-style2">CALL MANAGEMENT</a></li>
-			<li><a href="/demos/index.html" class="td-style2">LOGOUT</a></li>
+		<ul class="navbar-nav mr-auto">
+			<li class="nav-item "><a class="nav-link" href="dashboard/">CUSTOMER SERVICE ROOMS</a></li>
+			<li class="nav-item "><a class="nav-link" href="/demos/dashboard/sales-list.html">SALES MANAGEMENT</a></li>
+			<li class="nav-item "><a class="nav-link" href="/demos/dashboard/call-management.html">CALL MANAGEMENT</a>
+			</li>
+			<li class="nav-item "><a class="nav-link" href="/demos/index.html">LOGOUT</a></li>
 		</ul>
 		<hr />
 	</div>
