@@ -10,7 +10,7 @@ const ioServer = require('socket.io');
 const RTCMultiConnectionServer = require('rtcmulticonnection-server');
 
 var PORT = 9001;
-var isUseHTTPs = false;
+var isUseHTTPs = true;
 
 const jsonPath = {
     config: 'config.json',
@@ -27,10 +27,10 @@ config = getBashParameters(config, BASH_COLORS_HELPER);
 
 // if user didn't modifed "PORT" object
 // then read value from "config.json"
-if(PORT === 9001) {
+if (PORT === 9001) {
     PORT = config.port;
 }
-if(isUseHTTPs === false) {
+if (isUseHTTPs === false) {
     isUseHTTPs = config.isUseHTTPs;
 }
 
@@ -70,7 +70,7 @@ function serverHandler(request, response) {
             }
         }
 
-        if(filename.indexOf(resolveURL('/admin/')) !== -1 && config.enableAdmin !== true) {
+        if (filename.indexOf(resolveURL('/admin/')) !== -1 && config.enableAdmin !== true) {
             try {
                 response.writeHead(401, {
                     'Content-Type': 'text/plain'
@@ -85,14 +85,14 @@ function serverHandler(request, response) {
         }
 
         var matched = false;
-        ['/demos/', '/dev/', '/dist/', '/socket.io/', '/node_modules/canvas-designer/', '/admin/'].forEach(function(item) {
+        ['/demos/', '/dev/', '/dist/', '/socket.io/', '/node_modules/canvas-designer/', '/admin/'].forEach(function (item) {
             if (filename.indexOf(resolveURL(item)) !== -1) {
                 matched = true;
             }
         });
 
         // files from node_modules
-        ['RecordRTC.js', 'FileBufferReader.js', 'getStats.js', 'getScreenId.js', 'adapter.js', 'MultiStreamsMixer.js'].forEach(function(item) {
+        ['RecordRTC.js', 'FileBufferReader.js', 'getStats.js', 'getScreenId.js', 'adapter.js', 'MultiStreamsMixer.js'].forEach(function (item) {
             if (filename.indexOf(resolveURL('/node_modules/')) !== -1 && filename.indexOf(resolveURL(item)) !== -1) {
                 matched = true;
             }
@@ -111,7 +111,7 @@ function serverHandler(request, response) {
             }
         }
 
-        ['Video-Broadcasting', 'Screen-Sharing', 'Switch-Cameras'].forEach(function(fname) {
+        ['Video-Broadcasting', 'Screen-Sharing', 'Switch-Cameras'].forEach(function (fname) {
             try {
                 if (filename.indexOf(fname + '.html') !== -1) {
                     filename = filename.replace(fname + '.html', fname.toLowerCase() + '.html');
@@ -187,7 +187,7 @@ function serverHandler(request, response) {
             contentType = 'image/png';
         }
 
-        fs.readFile(filename, 'binary', function(err, file) {
+        fs.readFile(filename, 'binary', function (err, file) {
             if (err) {
                 response.writeHead(500, {
                     'Content-Type': 'text/plain'
@@ -199,7 +199,7 @@ function serverHandler(request, response) {
 
             try {
                 file = file.replace('connection.socketURL = \'/\';', 'connection.socketURL = \'' + config.socketURL + '\';');
-            } catch (e) {}
+            } catch (e) { }
 
             response.writeHead(200, {
                 'Content-Type': contentType
@@ -266,14 +266,14 @@ if (isUseHTTPs) {
 }
 
 RTCMultiConnectionServer.beforeHttpListen(httpApp, config);
-httpApp = httpApp.listen(process.env.PORT || PORT, process.env.IP || "0.0.0.0", function() {
+httpApp = httpApp.listen(process.env.PORT || PORT, process.env.IP || "0.0.0.0", function () {
     RTCMultiConnectionServer.afterHttpListen(httpApp, config);
 });
 
 // --------------------------
 // socket.io codes goes below
 
-ioServer(httpApp).on('connection', function(socket) {
+ioServer(httpApp).on('connection', function (socket) {
     RTCMultiConnectionServer.addSocket(socket, config);
 
     // ----------------------
@@ -285,7 +285,7 @@ ioServer(httpApp).on('connection', function(socket) {
         params.socketCustomEvent = 'custom-message';
     }
 
-    socket.on(params.socketCustomEvent, function(message) {
+    socket.on(params.socketCustomEvent, function (message) {
         socket.broadcast.emit(params.socketCustomEvent, message);
     });
 });
