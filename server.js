@@ -226,8 +226,8 @@ if (isUseHTTPs) {
     // See how to use a valid certificate:
     // https://github.com/muaz-khan/WebRTC-Experiment/issues/62
     var options = {
-        key: null,
-        cert: null,
+        key: fs.readFileSync('fake-keys/privatekey.pem'),
+        cert: fs.readFileSync('fake-keys/certificate.pem'),
         ca: null
     };
 
