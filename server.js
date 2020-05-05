@@ -10,7 +10,7 @@ const ioServer = require('socket.io');
 const RTCMultiConnectionServer = require('rtcmulticonnection-server');
 
 var PORT = 9001;
-var isUseHTTPs = true;
+var isUseHTTPs = false;
 
 const jsonPath = {
     config: 'config.json',
@@ -226,8 +226,8 @@ if (isUseHTTPs) {
     // See how to use a valid certificate:
     // https://github.com/muaz-khan/WebRTC-Experiment/issues/62
     var options = {
-        key: fs.readFileSync('fake-keys/privatekey.pem'),
-        cert: fs.readFileSync('fake-keys/certificate.pem'),
+        key: null,
+        cert: null,
         ca: null
     };
 
