@@ -166,8 +166,8 @@
         }
 
         #screen-viewer {
-            width: 100%;
-            height: 100%;
+            margin-top: -55px;
+            margin-left: -70px;
             z-index: 9999999999999;
             display: none;
         }
@@ -190,7 +190,7 @@
             <button id="btn-stop-record" class="btn btn-danger btn-sm">Stop Record Video</button>
         </div>
         <div class="screen-container">
-            <video id="screen-viewer" controls playsinline autoplay></video>
+            <video id="screen-viewer" controls playsinline autoplay width="1290" height="800"></video>
         </div>
         <div style="width: 20%; height: 100%; position: absolute;left:0;">
             <video id="main-video" controls playsinline autoplay></video>
@@ -343,12 +343,6 @@
         connection.onmessage = function (event) {
             if (event.data.showMainVideo) {
                 // $('#main-video').show();
-                $('#screen-viewer').css({
-                    top: $('#widget-container').offset().top,
-                    left: $('#widget-container').offset().left,
-                    width: $('#widget-container').width(),
-                    height: $('#widget-container').height()
-                });
                 $('#screen-viewer').show();
                 return;
             }
@@ -832,12 +826,6 @@
             });
 
             // $('#main-video').show();
-            $('#screen-viewer').css({
-                top: $('#widget-container').offset().top,
-                left: $('#widget-container').offset().left,
-                width: $('#widget-container').width(),
-                height: $('#widget-container').height()
-            });
             $('#screen-viewer').show();
         }
 
